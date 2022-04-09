@@ -46,6 +46,10 @@ Example: ^example-([\d\w]+)-([\d\w]+).txt$""")
     patternText = input()
     pattern = re.compile(patternText)
 
+    print(r"""
+Numbering
+---------""")
+
     # とりあえず一覧します
     for i, file in enumerate(files):
         basename = os.path.basename(file)
@@ -101,6 +105,10 @@ Do you want to run it (y/n)?""")
         break
     else:
         print("Canceld")
+
+print("""
+Result
+------""")
 
 # 置換実行
 for i, file in enumerate(files):
