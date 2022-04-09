@@ -8,7 +8,7 @@
 python main.py
 ```
 
-# Example
+# How to use
 
 ```plaintext
 python main.py
@@ -57,7 +57,9 @@ Result
 (0)Rename C:\Users\むずでょ\Documents\GitHub\file-renaming\example-1-a.txt --> C:\Users\むずでょ\Documents\GitHub\file-renaming\example-a-1.txt
 ```
 
-# How to use
+# Case study
+
+## Case 1
 
 例えばファイル名を以下のように付けているとする。  
 
@@ -78,6 +80,32 @@ Result
 ```plaintext
 # Before:
 ^(\d{6})(\d{2})(\d{4})([\d\w]*).png$
+
+# After:
+\1__math__\2-\3-\4.png
+```
+
+## Case 2
+
+例えばファイル名を以下のように付けているとする。  
+
+```plaintext
+201612030331_1.png
+201612030331_10b.png
+```
+
+これを以下のように変形したい。  
+
+```plaintext
+201612__etc__03-0331_1.png
+201612__etc__03-0331_10b.png
+```
+
+ならば正規表現は以下のようにする。  
+
+```plaintext
+# Before:
+^(\d{6})(\d{2})(\d{4})_([\d\w]*).png$
 
 # After:
 \1__math__\2-\3-\4.png
