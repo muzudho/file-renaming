@@ -76,9 +76,9 @@ Result
 ならば正規表現は以下のようにする。  
 
 ```plaintext
-整形前
+# Before:
 ^(\d{6})(\d{2})(\d{4})([\d\w]+).png$
 
-整形後
+# After:
 \1__math__\2-\3-\4.png
 ```
