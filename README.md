@@ -77,7 +77,7 @@ Result
 
 ```plaintext
 # Before:
-^(\d{6})(\d{2})(\d{4})([\d\w]+).png$
+^(\d{6})(\d{2})(\d{4})([\d\w]*).png$
 
 # After:
 \1__math__\2-\3-\4.png
