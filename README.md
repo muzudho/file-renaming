@@ -106,7 +106,7 @@ Result
 
 ```plaintext
 # Before:
-^(\d{6})(\d{2})([\d\w]*).png$
+^(\d{6})(\d{2})([^.]*).png$
 
 # After:
 \1__math__\2-\3.png
@@ -188,4 +188,28 @@ img13b13c1.png
 
 # After:
 201712__shogi-wcsc27-pr1__\1.png
+```
+
+## Case 6
+
+例えばファイル名を以下のように付けているとする。  
+
+```plaintext
+202002__math__23-blog9.png
+```
+
+これを以下のように変形したい。  
+
+```plaintext
+202002__blog__23-blog9.png
+```
+
+ならば正規表現は以下のようにする。  
+
+```plaintext
+# Before:
+^(.*)__math__([^\.]*).png$
+
+# After:
+\1__blog__\2.png
 ```
