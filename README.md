@@ -163,3 +163,29 @@ Result
 # After:
 \1__music-01完全１度__\2-\3.png
 ```
+
+## Case 5
+
+例えばファイル名を以下のように付けているとする。  
+
+```plaintext
+img13.png
+img13b13c1.png
+```
+
+これを以下のように変形したい。  
+
+```plaintext
+201712__shogi-wcsc27-pr1__13.png
+201712__shogi-wcsc27-pr1__13b13c1.png
+```
+
+ならば正規表現は以下のようにする。  
+
+```plaintext
+# Before:
+^img([^\.]*).png$
+
+# After:
+201712__shogi-wcsc27-pr1__\1.png
+```
