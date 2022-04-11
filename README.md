@@ -6,6 +6,9 @@
 
 ```shell
 python main.py
+
+# ファイルに出力するなら
+python main.py > foo.log
 ```
 
 # How to use

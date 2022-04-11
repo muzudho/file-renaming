@@ -1,7 +1,10 @@
-import enum
 import os
 import glob
 import re
+import sys
+
+# 日本のWindows は "cp932" なので、Unicodeに変換
+sys.stdout.reconfigure(encoding='utf-8')
 
 # ディレクトリーを選んでください
 while True:
