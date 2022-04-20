@@ -1,40 +1,28 @@
 import os
-import glob
 import re
 import sys
+from fs_operation import input_change_current_directory, list_current_directory_files, input_y
 
 # 日本のWindows は "cp932" なので、Unicodeに変換
 sys.stdout.reconfigure(encoding='utf-8')
 
 # ディレクトリーを選んでください
 while True:
-    print("""Which directory?
-Example: .""")
-    # C:\muzudho\picture\2021-08-pg
+    input_change_current_directory("""Which directory?
+Example: .
+"""
+                                   )
 
-    path = input()
-    os.chdir(path)
+    print(f"""Current directory: {os.getcwd()}""")
 
     # フィル名を一覧します
-    print(f"""Current directory: {os.getcwd()}
+    files = list_current_directory_files()
 
-Files
------""")
+    is_y = input_y("""
+Are you sure this is the right directory (y/n)?
+""")
 
-    files = glob.glob("./*")
-
-    # とりあえず一覧します
-    for file in files:
-        # `file` - Example: `.\20210815shogi67.png`
-        basename = os.path.basename(file)
-        print(basename)
-
-    print("""
-Are you sure this is the right directory (y/n)?""")
-
-    answer = input()
-
-    if answer == "y":
+    if is_y:
         break
     else:
         print("Canceld")
@@ -44,7 +32,6 @@ while True:
     print(r"""
 Please enter a regular expression pattern.
 Example: ^example-([\d\w]+)-([\d\w]+).txt$""")
-    # ^(.+)shogi(.+)$
 
     patternText = input()
     pattern = re.compile(patternText)
@@ -69,25 +56,24 @@ Numbering
             # Unmatched
             print(f"( ) {basename}")
 
-    print("""
-Was there a match (y/n)?""")
+    is_y = input_y("""
+Was there a match (y/n)?
+""")
 
-    answer = input()
-
-    if answer == "y":
+    if is_y:
         break
     else:
         print("Canceld")
 
-# 置換のシミュレーション
+# 置換後の正規表現
 while True:
     print(r"""
 Enter the pattern after the conversion.
 Example: example-\2-\1.txt""")
-    # \1pg\2
 
     replacement = input()
 
+    # 置換のシミュレーション
     print("""
 Simulation
 ----------""")
@@ -99,12 +85,11 @@ Simulation
             converted = re.sub(patternText, replacement, basename)
             print(f"({i+1}) {basename} --> {converted}")
 
-    print("""
-Do you want to run it (y/n)?""")
+    is_y = input_y("""
+Do you want to run it (y/n)?
+""")
 
-    answer = input()
-
-    if answer == "y":
+    if is_y:
         break
     else:
         print("Canceld")
