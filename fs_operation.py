@@ -12,13 +12,17 @@ def input_change_current_directory(prompt_message):
     os.chdir(path)
 
 
+def list_current_directory_files_no_echo():
+    return glob.glob("./*")
+
+
 def list_current_directory_files():
     """カレント ディレクトリーのファイルを一覧します"""
     print(f"""
 Files
 -----""")
 
-    files = glob.glob("./*")
+    files = list_current_directory_files_no_echo()
 
     # 一覧します
     for file in files:

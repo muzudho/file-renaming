@@ -1,7 +1,8 @@
 import os
 import re
 import sys
-from fs_operation import input_change_current_directory, list_current_directory_files, input_y
+from fs_operation import input_change_current_directory, list_current_directory_files, input_y, \
+    list_current_directory_files_no_echo
 
 # 日本のWindows は "cp932" なので、Unicodeに変換
 sys.stdout.reconfigure(encoding='utf-8')
@@ -27,7 +28,14 @@ Are you sure this is the right directory (y/n)?
     else:
         print("Canceld")
 
+is_dirty_files = False
+
 while True:
+
+    if is_dirty_files:
+        files = list_current_directory_files_no_echo()
+
+    is_dirty_files = True
 
     # 正規表現のパターンを入力してください
     while True:
