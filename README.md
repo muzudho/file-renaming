@@ -261,10 +261,45 @@ img13b13c1.png
 
 ならば正規表現は以下のようにする。  
 
+Before:  
+
 ```plaintext
-# Before:
 ^(\d{6}__[^_]*__\d{2}-\d+)a([\d\w]*).png$
 
-# After:
+# バージョン番号部の小文字のoも数字とみなす場合
+^(\d{6}__[^_]*__\d{2}-(?:\d|o)+)a([\d\w]*).png$
+```
+
+After:  
+
+```plaintext
 \1o\2.png
+```
+
+## Case 9
+
+例えばファイル名を以下のように付けているとする。  
+
+```plaintext
+202102__physics__01-blog1a1b1.png
+```
+
+これを以下のように変形したい。  
+
+```plaintext
+202102__physics-blog__01-1a1b1.png
+```
+
+ならば正規表現は以下のようにする。  
+
+Before:  
+
+```plaintext
+^(\d{6}__physics)(__\d{2})-blog([^\.]*)\.png$
+```
+
+After:  
+
+```plaintext
+\1-blog\2-\3.png
 ```
