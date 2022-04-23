@@ -3,6 +3,7 @@ import re
 import sys
 from fs_operation import input_change_current_directory, list_current_directory_files, input_y, \
     list_current_directory_files_no_echo
+from this_operation import list_matched_files
 
 # 日本のWindows は "cp932" なので、Unicodeに変換
 sys.stdout.reconfigure(encoding='utf-8')
@@ -46,25 +47,11 @@ Example: ^example-([\d\w]+)-([\d\w]+).txt$""")
         patternText = input()
         pattern = re.compile(patternText)
 
-        print(r"""
-Numbering
----------""")
-
         # とりあえず一覧します
-        for i, file in enumerate(files):
-            basename = os.path.basename(file)
-            result = pattern.match(basename)
-            if result:
-                # Matched
-                # グループ数
-                groupCount = len(result.groups())
-                buf = f"({i+1}) {basename}"
-                for j in range(0, groupCount):
-                    buf += f" \\{j+1}=[{result.group(j+1)}]"
-                print(buf)
-            else:
-                # Unmatched
-                print(f"( ) {basename}")
+        list_matched_files(files, pattern, """
+Numbering
+---------
+""")
 
         is_y = input_y("""
 Was there a match (y/n)?
